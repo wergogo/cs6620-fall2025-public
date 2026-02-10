@@ -39,7 +39,13 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: |
+            org.opencontainers.image.source=${{ github.event.repository.html_url }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            build.source=github-actions
+            build.workflow=${{ github.workflow }}
+            build.run_id=${{ github.run_id }}
+            build.run_number=${{ github.run_number }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/cs6620-app:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/cs6620-app:buildcache,mode=max
 
