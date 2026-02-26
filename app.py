@@ -89,15 +89,6 @@ def parse_log_content(log_content):
         data[filename].append(segment)
     return data
     
-@app.route('/')
-def hello():
-    return f'''
-    <h1>Hello from Automated CI/CD Pipeline!</h1>
-    <p><strong>Version:</strong> 2.0 - Automated Deployment Junping Zhu</p>
-    <p><strong>Deployed via:</strong> GitHub Actions + AWS SSM</p>
-    <p><strong>Build Date:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
-    <p><strong>Assignment:</strong> Automated EC2 Deployment</p>
-    '''
 
 @app.route('/health')
 def health():
@@ -158,12 +149,12 @@ def serve_audio_segment():
         app.logger.error(f"Error extracting audio segment: {e}")
         return f"Error extracting audio segment: {str(e)}", 500
 
-#@app.route('/')
-#def index():
+@app.route('/')
+def index():
     """
     Renders the main HTML page for the client-side audio player.
     """
-#    return render_template('index.html') 
+    return render_template('index.html') 
 
 @app.route('/select_directory', methods=['POST'])
 def select_directory():
